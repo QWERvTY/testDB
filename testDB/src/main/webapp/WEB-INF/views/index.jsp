@@ -6,17 +6,61 @@
 <meta charset="UTF-8">
 <title>TEST!</title>
 <script type="text/javascript" src="/js/jquery-1.12.4.min.js"></script>
+<style type="text/css">
+#content{
+	width: 720px;
+	margin: auto;
+}
+table {
+	border: 1px solid #333;
+	width: 720px;
+	text-align: center;
+	padding: 1rem;
+}
+input {
+	width: 80%;
+}
+button {
+	border-radius: 3px;
+	border: 1px solid #bbb;
+	background-color: #3388EE;
+	color: #FFF;
+	margin: 1rem;
+	width: 80px;
+	height: 40px;
+}
+</style>
 </head>
 <body>
+<div id="content">
 <button id="select">SELECT</button>
 <button id="insert">INSERT</button>
-<div id="data">
-<input type="text" name="id" >
-<input type="text" name="name" >
-<input type="text" name="location" >
-<input type="date" name="birthday" >
-</div>
+<table>
+<colgroup>
+	<col width="150">
+	<col width="150">
+	<col width="150">
+	<col width="150">
+</colgroup>
+<thead>
+	<tr>
+		<th scope="col">ID</th>
+		<th scope="col">NAME</th>
+		<th scope="col">지역</th>
+		<th scope="col">생년월일</th>
+	</tr>
+</thead>
+<tbody id="data">
+	<tr>
+		<td><input type="text" name="id"></td>
+		<td><input type="text" name="name"></td>
+		<td><input type="text" name="location"></td>
+		<td><input type="date" name="birthday"></td>
+	</tr>
+</tbody>
+</table>
 <div id="result"></div>
+</div>
 </body>
 <script type="text/javascript">
 $(document).ready(function() {
