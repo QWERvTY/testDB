@@ -4,7 +4,7 @@ CREATE TABLE user(
 	id VARCHAR(20) PRIMARY KEY,
 	name VARCHAR(20) NOT NULL,
 	location VARCHAR(14),
-	birthday DATE
+	birthday TIMESTAMP
 
 );
 

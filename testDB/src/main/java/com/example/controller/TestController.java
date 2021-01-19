@@ -1,7 +1,12 @@
 package com.example.controller;
 
-import java.sql.Date;
 import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import org.json.simple.JSONArray;
@@ -29,10 +34,10 @@ public class TestController {
 	public String test() {
 		log.info("INDEX!");
 		
-		JSONArray jArr = null;
-
-		jArr = testService.getUser();
-		System.out.println(jArr.toJSONString());
+//		JSONArray jArr = null;
+//
+//		jArr = testService.getUser();
+//		System.out.println(jArr.toJSONString());
 		
 		return "index";
 	}
@@ -53,20 +58,24 @@ public class TestController {
 	public int insertUser(@RequestParam Map<String, String> reqMap) {
 		log.info(reqMap.toString());
 		int num		= 0;
-		String time	= reqMap.get("timestamp");
-		Date date	= null;
+		String time	= reqMap.get("birthday");
+		System.out.println(time);
+		Timestamp timeDate = new Timestamp(0);
 		
 		if (time != null || !"".equals(time)) {
-			int year, month, day = 0;
 			
-			year	= Integer.parseInt(time.substring(0, 4));
-			month	= Integer.parseInt(time.substring(4, 6));
-			day		= Integer.parseInt(time.substring(6, 8));
-			date	= new Date(year, month, day);
+			try {
+				DateFormat dateFormat	= new SimpleDateFormat("yyyy-MM-dd");
+				Date date				= dateFormat.parse(time);
+				timeDate				= new Timestamp(date.getTime());
+				System.out.println(timeDate);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
 		}
 		
-		UserDto user = new UserDto(reqMap.get("id"), reqMap.get("name"), reqMap.get("location"), date);
-		
+		UserDto user = new UserDto(reqMap.get("id"), reqMap.get("name"), reqMap.get("location"), timeDate);
 		
 		num = testService.insertUser(user);
 		System.out.println(num);

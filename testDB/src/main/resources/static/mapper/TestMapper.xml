@@ -5,7 +5,7 @@
 
 <mapper namespace="com.example.mapper.TestMapper">
 
-<select id="getUser" resultType="UserDto">
+<select id="getUser" resultType="com.example.dto.UserDto">
 SELECT * FROM user
 </select>
 

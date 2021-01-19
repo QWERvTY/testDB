@@ -14,7 +14,7 @@
 <input type="text" name="id" >
 <input type="text" name="name" >
 <input type="text" name="location" >
-<input type="date" name="data" >
+<input type="date" name="birthday" >
 </div>
 <div id="result"></div>
 </body>
@@ -38,7 +38,7 @@ $(document).ready(function() {
 		console.log('INSERT!');
 		var data 	= inpToData();
 		var getData	= {
-			'uri'		: '/getUser',
+			'uri'		: '/insertUser',
 			'method'	: 'POST',
 			'data'		: data
 		}

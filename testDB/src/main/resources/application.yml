@@ -5,27 +5,27 @@ server:
 spring:
   h2:
     console:
-      path: /h2_console
-      enabled: true
+      path    : /h2_console
+      enabled : true
 
 # H2DB
   datasource:
-    url: jdbc:h2:mem:testDB
-    driver-class-name: org.h2.Driver
-    username: sa
-    password: 
-    schema: classpath:data.sql
+    url               : jdbc:h2:mem:testDB
+    driver-class-name : org.h2.Driver
+    username          : sa
+    password          : 
+    schema            : classpath:data.sql
         
 # WEB
   mvc:
     view:
-      prefix: /WEB-INF/viwes/
+      prefix: /WEB-INF/views/
       suffix: .jsp
       
 # MyBatis
 mybatis:
-  mapper-locations: /mapper/*.xml
   type-aliases-package: com.example.dto
-
+  mapper-locations    : classpath:static/mapper/*.xml
+  #classpath - src/main/resources
 
 
