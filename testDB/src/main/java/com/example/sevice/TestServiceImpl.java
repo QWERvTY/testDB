@@ -32,8 +32,6 @@ public class TestServiceImpl implements TestService {
 		for (UserDto user : userList) {
 			jObj = new JSONObject();
 			
-			t = user.getBirthday();
-			
 			jObj.put("id", user.getId());
 			jObj.put("name", user.getName());
 			jObj.put("location", user.getLocation());

@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,6 +28,15 @@ button {
 	margin: 1rem;
 	width: 80px;
 	height: 40px;
+}
+td{
+	height: 50px;
+}
+#result{
+	margin-top: 50px;
+}
+.hide{
+	display: none;
 }
 </style>
 </head>
@@ -60,7 +68,7 @@ button {
 	</tr>
 </tbody>
 </table>
-<div id="result" style="margin-top: 50px;">
+<div id="result" class="hide">
 <table>
 <colgroup>
 	<col width="50">
@@ -110,6 +118,7 @@ $(document).ready(function() {
 			}
 		}
 		
+		$result.addClass('hide');
 		ajaxCall(getData);
 	});
 	
@@ -159,6 +168,7 @@ $(document).ready(function() {
 		var no			= 0;
 		var $resultBody = $('#resultBody').empty();
 		var data 		= JSON.parse(jsonData);
+		$result.removeClass('hide');
 		
 		$.each(data, function(i, v){
 			$trClone = $tr.clone().appendTo($resultBody);
@@ -171,9 +181,15 @@ $(document).ready(function() {
 			
 		});
 		
+	}
+	
+	function dateFormat(date) {
 		
+		var year	= date.getFullYear();
+		var month	= date.getMonth();
+		var day		= date.getDay();
 		
-		
+		return year+'-'+month+'-'+day;
 	}
 	
 

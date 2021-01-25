@@ -67,6 +67,7 @@ public class TestController {
 			try {
 				DateFormat dateFormat	= new SimpleDateFormat("yyyy-MM-dd");
 				Date date				= dateFormat.parse(time);
+				
 				timeDate				= new Timestamp(date.getTime());
 				System.out.println(timeDate);
 			} catch (Exception e) {
