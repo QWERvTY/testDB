@@ -61,8 +61,8 @@ td{
 </thead>
 <tbody id="data">
 	<tr>
-		<td><input type="text" name="id" required="required"></td>
-		<td><input type="text" name="name" required="required"></td>
+		<td><input type="text" name="id"></td>
+		<td><input type="text" name="name"></td>
 		<td><input type="text" name="location"></td>
 		<td><input type="date" name="birthday"></td>
 	</tr>
@@ -78,7 +78,7 @@ td{
 	<col width="140">
 </colgroup>
 <thead>
-<tr><th colspan="5">USER</th></tr>
+<tr><th colspan="5"><h3>USER</h3></th></tr>
 </thead>
 <tbody id="resultBody"></tbody>
 </table></div>
@@ -103,6 +103,15 @@ $(document).ready(function() {
 	$('#insert').click(function() {
 		console.log('INSERT!');
 		var data 	= inpToData();
+		
+		if(data.id == ''){
+			alert('ID는 필수입니다!');
+			return false;
+		} else if(data.name == ''){
+			alert('NAME은 필수입니다!');
+			return false;
+		}
+		
 		var getData	= {
 			uri		: '/insertUser',
 			method	: 'POST',
@@ -164,7 +173,6 @@ $(document).ready(function() {
 		var $th 		= $('<th>');
 		var $td 		= $('<td>');
 		var $trClone;
-		var date 		= '';
 		
 		var no			= 0;
 		var $resultBody = $('#resultBody').empty();
@@ -173,13 +181,12 @@ $(document).ready(function() {
 		
 		$.each(data, function(i, v){
 			$trClone	= $tr.clone().appendTo($resultBody);
-			date = v.birthday;
 			
 			$th.clone().html(++no).appendTo($trClone);
 			$td.clone().html(v.id).appendTo($trClone);
 			$td.clone().html(v.name).appendTo($trClone);
 			$td.clone().html(v.location).appendTo($trClone);
-			$td.clone().html(dateFormat(date)).appendTo($trClone);
+			$td.clone().html(dateFormat(v.birthday)).appendTo($trClone);
 			
 		});
 		
