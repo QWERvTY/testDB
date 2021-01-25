@@ -9,6 +9,11 @@
 SELECT * FROM user
 </select>
 
+<select id="getUserById" resultType="com.example.dto.UserDto">
+SELECT * FROM user
+WHERE id = #{id}
+</select>
+
 <insert id="insertUser" >
 INSERT INTO user (id, name, location, birthday) VALUES (#{id}, #{name}, #{location}, #{birthday})
 </insert>

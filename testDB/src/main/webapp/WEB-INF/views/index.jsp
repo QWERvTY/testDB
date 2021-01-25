@@ -53,8 +53,8 @@ button {
 </thead>
 <tbody id="data">
 	<tr>
-		<td><input type="text" name="id"></td>
-		<td><input type="text" name="name"></td>
+		<td><input type="text" name="id" required="required"></td>
+		<td><input type="text" name="name" required="required"></td>
 		<td><input type="text" name="location"></td>
 		<td><input type="date" name="birthday"></td>
 	</tr>
@@ -83,7 +83,6 @@ $(document).ready(function() {
 	
 	$('#select').click(function() {
 		console.log('SELECT!');
-// 		var data 	= inpToData();
 		var getData	= {
 			uri		: '/getUser',
 			method	: 'POST',
@@ -101,7 +100,13 @@ $(document).ready(function() {
 			method	: 'POST',
 			data	: data,
 			fn		: function(data) {
-				alert('입력완료!' + data);
+				if (data == 0){
+					console.log('ID 중복!');
+					alert('ID가 이미 존재합니다!' + data);
+				}else{
+					alert('입력완료!' + data);
+					
+				}
 			}
 		}
 		
@@ -145,7 +150,7 @@ $(document).ready(function() {
 		});
 	}
 	
-	function displayData(jsonData){
+	function displayData(jsonData) {
 		var $tr 		= $('<tr>');
 		var $th 		= $('<th>');
 		var $td 		= $('<td>');

@@ -13,6 +13,8 @@ public interface TestMapper {
 	
 	public List<UserDto> getUser();
 	
+	public UserDto getUserById(String id);
+	
 	public int insertUser(UserDto user); 
 
 }
