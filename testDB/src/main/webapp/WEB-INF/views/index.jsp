@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -59,7 +60,20 @@ button {
 	</tr>
 </tbody>
 </table>
-<div id="result"></div>
+<div id="result" style="margin-top: 50px;">
+<table>
+<colgroup>
+	<col width="50">
+	<col width="140">
+	<col width="140">
+	<col width="140">
+	<col width="140">
+</colgroup>
+<thead>
+<tr><th colspan="5">USER</th></tr>
+</thead>
+<tbody id="resultBody"></tbody>
+</table></div>
 </div>
 </body>
 <script type="text/javascript">
@@ -71,8 +85,9 @@ $(document).ready(function() {
 		console.log('SELECT!');
 // 		var data 	= inpToData();
 		var getData	= {
-			'uri'		: '/getUser',
-			'method'	: 'POST'
+			uri		: '/getUser',
+			method	: 'POST',
+			fn		: displayData
 		}
 		
 		ajaxCall(getData);
@@ -82,33 +97,18 @@ $(document).ready(function() {
 		console.log('INSERT!');
 		var data 	= inpToData();
 		var getData	= {
-			'uri'		: '/insertUser',
-			'method'	: 'POST',
-			'data'		: data
+			uri		: '/insertUser',
+			method	: 'POST',
+			data	: data,
+			fn		: function(data) {
+				alert('입력완료!' + data);
+			}
 		}
 		
 		ajaxCall(getData);
 	});
 	
 	
-
-	function ajaxCall(inp) {
-		$.ajax({
-			url			: inp.uri
-			,type		: inp.method
-			,data		: inp.data
-			,dataType	: 'text'
-			,success	: function(data){
-				console.log('success ' + data);
-				$result.html(data);
-			}
-			,error		: function(xhr, status, error){
-				console.log(xhr);
-				console.log(xhr.status+', '+status+'\n'+error);
-			}
-		});
-	}
-
 	function inpToData() {
 		var data	= {};
 		var name	= null;
@@ -127,6 +127,51 @@ $(document).ready(function() {
 		
 		return data;
 	}
+
+	function ajaxCall(inp) {
+		$.ajax({
+			url			: inp.uri
+			,type		: inp.method
+			,data		: inp.data
+			,dataType	: 'text'
+			,success	: function(data){
+				console.log('success ' + data);
+				inp.fn(data);
+			}
+			,error		: function(xhr, status, error){
+				console.log(xhr);
+				console.log(xhr.status+', '+status+'\n'+error);
+			}
+		});
+	}
+	
+	function displayData(jsonData){
+		var $tr 		= $('<tr>');
+		var $th 		= $('<th>');
+		var $td 		= $('<td>');
+		var $trClone;
+		
+		var no			= 0;
+		var $resultBody = $('#resultBody').empty();
+		var data 		= JSON.parse(jsonData);
+		
+		$.each(data, function(i, v){
+			$trClone = $tr.clone().appendTo($resultBody);
+			
+			$th.clone().html(++no).appendTo($trClone);
+			$td.clone().html(v.id).appendTo($trClone);
+			$td.clone().html(v.name).appendTo($trClone);
+			$td.clone().html(v.location).appendTo($trClone);
+			$td.clone().html(v.birthday).appendTo($trClone);
+			
+		});
+		
+		
+		
+		
+	}
+	
+
 
 });
 

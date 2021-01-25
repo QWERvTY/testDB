@@ -1,5 +1,6 @@
 package com.example.sevice;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.json.simple.JSONArray;
@@ -21,15 +22,18 @@ public class TestServiceImpl implements TestService {
 	public JSONArray getUser() {
 		JSONArray jArr	= new JSONArray();
 		JSONObject jObj	= null;
-		List<UserDto> userList	= testMapper.getUser(); 
+		Timestamp t 	= null;
+		List<UserDto> userList	= testMapper.getUser();
 
 		for (UserDto user : userList) {
 			jObj = new JSONObject();
 			
+			t = user.getBirthday();
+			
 			jObj.put("id", user.getId());
 			jObj.put("name", user.getName());
-			jObj.put("birthday", user.getBirthday());
 			jObj.put("location", user.getLocation());
+			jObj.put("birthday", user.getBirthday());
 			jArr.add(jObj);
 		}
 		

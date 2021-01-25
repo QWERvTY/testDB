@@ -10,7 +10,7 @@ SELECT * FROM user
 </select>
 
 <insert id="insertUser" >
-INSERT INTO user (id, name, birthday, location) VALUES (#{id}, #{name}, #{birthday}, #{location})
+INSERT INTO user (id, name, location, birthday) VALUES (#{id}, #{name}, #{location}, #{birthday})
 </insert>
 
 

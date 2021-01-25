@@ -49,7 +49,7 @@ public class TestController {
 		JSONArray jArr = null;
 
 		jArr = testService.getUser();
-		System.out.println(jArr.toJSONString());
+		System.out.println("jArr//"+jArr.toJSONString());
 		return jArr;
 	}
 	
@@ -60,9 +60,9 @@ public class TestController {
 		int num		= 0;
 		String time	= reqMap.get("birthday");
 		System.out.println(time);
-		Timestamp timeDate = new Timestamp(0);
+		Timestamp timeDate = null;
 		
-		if (time != null || !"".equals(time)) {
+		if (time != null && !"".equals(time)) {
 			
 			try {
 				DateFormat dateFormat	= new SimpleDateFormat("yyyy-MM-dd");
