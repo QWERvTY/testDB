@@ -2,15 +2,11 @@ package com.example.controller;
 
 import java.sql.Timestamp;
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Map;
 
 import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,13 +15,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.example.demo.TestRunner;
 import com.example.dto.UserDto;
 import com.example.sevice.TestService;
 
 @Controller
 public class TestController {
-	private static Logger log = LoggerFactory.getLogger(TestRunner.class);
+	private static Logger log = LoggerFactory.getLogger(TestController.class);
 	
 	@Autowired
 	private TestService testService;
