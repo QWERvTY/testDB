@@ -164,6 +164,7 @@ $(document).ready(function() {
 		var $th 		= $('<th>');
 		var $td 		= $('<td>');
 		var $trClone;
+		var date 		= '';
 		
 		var no			= 0;
 		var $resultBody = $('#resultBody').empty();
@@ -171,25 +172,35 @@ $(document).ready(function() {
 		$result.removeClass('hide');
 		
 		$.each(data, function(i, v){
-			$trClone = $tr.clone().appendTo($resultBody);
+			$trClone	= $tr.clone().appendTo($resultBody);
+			date = v.birthday;
 			
 			$th.clone().html(++no).appendTo($trClone);
 			$td.clone().html(v.id).appendTo($trClone);
 			$td.clone().html(v.name).appendTo($trClone);
 			$td.clone().html(v.location).appendTo($trClone);
-			$td.clone().html(v.birthday).appendTo($trClone);
+			$td.clone().html(dateFormat(date)).appendTo($trClone);
 			
 		});
 		
 	}
 	
-	function dateFormat(date) {
+	function dateFormat(paramDate) {
+		var date 	= new Date(paramDate);
 		
 		var year	= date.getFullYear();
-		var month	= date.getMonth();
-		var day		= date.getDay();
+		var month	= date.getMonth()+1;
+		var date	= date.getDate();
 		
-		return year+'-'+month+'-'+day;
+		return year+'-'+select(month)+'-'+select(date);
+	}
+	
+	function select(num) {		// 두 자리 자릿수 맞추기
+		if (num < 10) {
+			return '0' + num;
+		} else {
+			return num;
+		}
 	}
 	
 
