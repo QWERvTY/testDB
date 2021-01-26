@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>TEST!</title>
+<link rel="icon" href="data:;base64,iVBORw0KGgo=">
 <script type="text/javascript" src="/js/jquery-1.12.4.min.js"></script>
 <style type="text/css">
 #content{

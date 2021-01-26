@@ -44,17 +44,16 @@ public class TestController {
 		JSONArray jArr = null;
 
 		jArr = testService.getUser();
-		System.out.println("jArr//"+jArr.toJSONString());
+		log.info("jArr // {}", jArr.toJSONString());
 		return jArr;
 	}
 	
 	@ResponseBody
 	@RequestMapping("/insertUser")
 	public int insertUser(@RequestParam Map<String, String> reqMap) {
-		log.info(reqMap.toString());
+		log.info("insertUser // {}", reqMap.toString());
 		int num		= 0;
 		String time	= reqMap.get("birthday");
-		System.out.println(time);
 		Timestamp timeDate = null;
 		
 		if (time != null && !"".equals(time)) {
@@ -63,7 +62,6 @@ public class TestController {
 				DateFormat dateFormat	= new SimpleDateFormat("yyyy-MM-dd");
 				Date date				= dateFormat.parse(time);
 				timeDate				= new Timestamp(date.getTime());
-				System.out.println(timeDate);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -73,7 +71,7 @@ public class TestController {
 		UserDto user = new UserDto(reqMap.get("id"), reqMap.get("name"), reqMap.get("location"), timeDate);
 		
 		num = testService.insertUser(user);
-		System.out.println(num);
+		log.info("Result Code // {}", num);
 		return num;
 	}
 	
